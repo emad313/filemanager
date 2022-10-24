@@ -1,0 +1,30 @@
+{
+    "name": "emad12/fileupload",
+    "type": "package",
+    "license": "MIT",
+    "keywords": ["laravel", "fileupload", "filemanager"],
+    "autoload": {
+        "psr-4": {
+            "Emad12\\Fileupload\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Emad12\\Fileupload\\FileuploadServiceProvider"
+            ],
+            "aliases": {
+                "filemanager": "Emad12\\Fileupload\\FileManager",
+                "Filemanager": "Emad12\\Fileupload\\FileManager"
+            }
+        }
+    },
+    "authors": [
+        {
+            "name": "emad313",
+            "email": "emad.uddin.0001@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
