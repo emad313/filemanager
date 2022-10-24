@@ -1,5 +1,5 @@
 {
-    "name": "emad12/fileupload",
+    "name": "emad12/filemanager",
     "type": "package",
     "license": "MIT",
     "keywords": ["laravel", "fileupload", "filemanager"],
