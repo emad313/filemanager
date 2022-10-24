@@ -39,25 +39,25 @@ class FileManager
     }
 
 
-    public static function getfilebyname($filepath,$filename)
+    public static function getSingleFile($filepath,$filename)
     {
         return Storage::disk('public')->get($filepath.'/'.$filename);
     }
 
-    public static function getallfiles($directory)
+    public static function getAllFiles($directory)
     {
         $files = Storage::disk('public')->allFiles($directory);
         return $files;
     }
 
-    public static function detelefile($filepath, $filename)
+    public static function deleteFiles($filepath, $filename)
     {
         Storage::disk('public')->delete($filepath.'/'.$filename);
         $feedback->delete();
         return 'File Delete Successfully!';
     }
 
-    public static function updatefile($base64, $filepath, $filename)
+    public static function updateFiles($base64, $filepath, $filename)
     {
         $image_64 = $base64; //your base64 encoded data
 
