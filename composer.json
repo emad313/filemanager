@@ -8,6 +8,9 @@
             "Emad12\\Fileupload\\": "src/"
         }
     },
+    "branch-alias": {
+        "dev-master": "1.0-dev"
+    },
     "extra": {
         "laravel": {
             "providers": [
