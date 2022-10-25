@@ -11,27 +11,34 @@ class FileManager
 {
     public static function upload($base64, $path)
     {
-        $image_64 = $base64; //your base64 encoded data
+        $file_64 = $base64; //your base64 encoded data
 
-        if (strpos($image_64, 'base64')) {
+        if (strpos($file_64, 'base64')) {
 
         
 
-        $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+        $extension = explode('/', explode(':', substr($file_64, 0, strpos($file_64, ';')))[1])[1];
       
-        $replace = substr($image_64, 0, strpos($image_64, ',')+1);
+        $replace = substr($file_64, 0, strpos($file_64, ',')+1);
       
-        // find substring fro replace here eg: data:image/png;base64,
       
-        $image = str_replace($replace, '', $image_64); 
+        $file1 = str_replace($replace, '', $file_64); 
       
-        $image = str_replace(' ', '+', $image); 
+        $file1 = str_replace(' ', '+', $file1);
+        
+        if ($extension == 'vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+            $extension = 'xlsx';
+        }elseif($extension == 'vnd.openxmlformats-officedocument.wordprocessingml.document'){
+            $extension = 'docx';
+        }else {
+            $extension = $extension;
+        }
       
-        $imageName = Str::random(10).'.'.$extension;
+        $randomFileName = Str::random(10).'.'.$extension;
       
-        Storage::disk('public')->put($path.'/'.$imageName, base64_decode($image));
-        $filepath = 'storage/'.$path.'/'.$imageName;
-        $filename = $imageName;
+        Storage::disk('public')->put($path.'/'.$randomFileName, base64_decode($file1));
+        $filepath = 'storage/'.$path.'/'.$randomFileName;
+        $filename = $randomFileName;
         return ['filename' => $filename, 'filepath'=>$filepath];
         }else{
             return 'File is not base64';
@@ -59,26 +66,32 @@ class FileManager
 
     public static function updateFiles($base64, $filepath, $filename)
     {
-        $image_64 = $base64; //your base64 encoded data
+        $file_64 = $base64; //your base64 encoded data
 
-        if (strpos($image_64, 'base64')) {
+        if (strpos($file_64, 'base64')) {
             
             Storage::disk('public')->delete($filepath.'/'.$filename);
 
-            $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+            $extension = explode('/', explode(':', substr($file_64, 0, strpos($file_64, ';')))[1])[1];
       
-            $replace = substr($image_64, 0, strpos($image_64, ',')+1);
+            $replace = substr($file_64, 0, strpos($file_64, ',')+1);
       
-            // find substring fro replace here eg: data:image/png;base64,
+            $file1 = str_replace($replace, '', $file_64); 
       
-            $image = str_replace($replace, '', $image_64); 
-      
-            $image = str_replace(' ', '+', $image); 
-      
-            $imageName = Str::random(10).'.'.$extension;
+            $file1 = str_replace(' ', '+', $file1);
 
-            Storage::disk('public')->put($filepath.'/'.$imageName, base64_decode($image));
-            $filename = $imageName;
+            if ($extension == 'vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+                $extension = 'xlsx';
+            }elseif($extension == 'vnd.openxmlformats-officedocument.wordprocessingml.document'){
+                $extension = 'docx';
+            }else {
+                $extension = $extension;
+            }
+      
+            $randomFileName = Str::random(10).'.'.$extension;
+
+            Storage::disk('public')->put($filepath.'/'.$randomFileName, base64_decode($file1));
+            $filename = $randomFileName;
             return ['filename' => $filename, 'filepath'=>$filepath];
         } else {
             return 'File is not base64';
