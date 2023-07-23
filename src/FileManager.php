@@ -78,6 +78,8 @@ class FileManager
 
             if ($extension == 'vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
                 $extension = 'xlsx';
+            } elseif ($extension == 'vnd.ms-excel.sheet.binary.macroEnabled.12') {
+                $extension = 'xlsb';
             } elseif ($extension == 'vnd.openxmlformats-officedocument.wordprocessingml.document') {
                 $extension = 'docx';
             } else {
